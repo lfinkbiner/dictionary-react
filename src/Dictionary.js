@@ -8,14 +8,12 @@ export default function Dictionary(){
     let [results, setResults] =useState(null);
 
     function handleResponse (response){
-        console.log(response.data[0].meanings[0].definitions[0].definition);
         setResults(response.data[0]);
     }
     function search(event){
         event.preventDefault();
 
         let apiUrl =`https://api.dictionaryapi.dev/api/v2/entries/en_US/${keyword}`;
-        console.log(apiUrl);
         axios.get(apiUrl).then(handleResponse);
     }
 
@@ -24,9 +22,10 @@ export default function Dictionary(){
     }
 
     return <div className= "Dictionary">
-        <form onSubmit={search}>
+        <section><form onSubmit={search}>
             <input type="search" autoFocus="on" onChange={handleKeywordChange}/>
         </form>
+        </section>
         <Result results={results} />
     </div>;
 }
